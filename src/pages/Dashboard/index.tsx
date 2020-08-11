@@ -41,7 +41,14 @@ const Dashboard: React.FC = () => {
     food: Omit<IFoodPlate, 'id' | 'available'>,
   ): Promise<void> {
     try {
-      // TODO ADD A NEW FOOD PLATE TO THE API
+      const foodId = foods.length + 1;
+      const newFood = {
+        ...food,
+        id: foodId,
+        available: true,
+      };
+
+      setFoods([...foods, newFood]);
     } catch (err) {
       console.log(err);
     }
@@ -72,11 +79,13 @@ const Dashboard: React.FC = () => {
   return (
     <>
       <Header openModal={toggleModal} />
+
       <ModalAddFood
         isOpen={modalOpen}
         setIsOpen={toggleModal}
         handleAddFood={handleAddFood}
       />
+
       <ModalEditFood
         isOpen={editModalOpen}
         setIsOpen={toggleEditModal}
